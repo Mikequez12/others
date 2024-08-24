@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editor de tanques v1.2.5 (alpha)</title>
+    <title>Editor de tanques v1.2.6 (omega)</title>
     <style>
         img, label, input, span {
             display: block;
@@ -58,7 +58,7 @@
             const h = document.querySelector('#h').value;
             const s = document.querySelector('#s').value;
             const l = document.querySelector('#l').value;
-            const message = `${h},${s},${l}`;
+            const message = btoa(`${h},${s},${l}`);
             const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
         }
