@@ -1,41 +1,66 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>Editor de tanques v1.0 (beta)</title>
-    </head>
+<head>
+    <title>Editor de tanques v1.0 (beta)</title>
+</head>
+<body>
+    <img src="tank.svg" id='tank'>
+    <label>
+        <input type="range" id="h" value="0" max="360">
+        <span id="hv">0</span>
+    </label>
+    <label>
+        <input type="range" id="s" value="100" max="100">
+        <span id="sv">100</span>
+    </label>
+    <label>
+        <input type="range" id="v" value="100" max="100">
+        <span id="vv">100</span>
+    </label>
+    <button onclick="sendWhatsApp()">Enviar</button>
 
-    <body>
-        <img src="tank.svg" id='tank'>
-        <label><input type="range" id="h" value="0" max="360">0</input><span id="hv">0</span></label>
-        <label><input type="range" id="s" value="0" max="100">0</input><span id="sv">0</span></label>
-        <label><input type="range" id="v" value="0" max="100">0</input><span id="vv">0</span></label>
-        <button onclick="sendWhatsaApp()">Enviar</button>
+    <style>
+        * {
+            display: block;
+        }
+        label > * {
+            display: inline-block !important;
+        }
+    </style>
 
-        <style>
-            * {
-                display:block;
-            }
-            label > * {
-                display:inline-block !important;
-            }
-        </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tank = document.querySelector('#tank');
+            var h = document.querySelector('#h');
+            var s = document.querySelector('#s');
+            var v = document.querySelector('#v');
+            var hv = document.querySelector('#hv');
+            var sv = document.querySelector('#sv');
+            var vv = document.querySelector('#vv');
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var tank = document.querySelector('#tank');
-                var h = document.querySelector('#h');
-                var s = document.querySelector('#s');
-                var v = document.querySelector('#v');
-                setInterval(function() {
-                    tank.style.filter = `hue-rotate(${h.value}deg);`;
-                }, 1000)
-            })
-            function sendWhatsApp() {
-                const message = `${h.value},${s.value},${v.value}`;
-                const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                window.open(whatsappLink, '_blank');
+            function updateFilter() {
+                tank.style.filter = `hue-rotate(${h.value}deg) saturate(${s.value}%) brightness(${v.value}%)`;
+                hv.textContent = h.value;
+                sv.textContent = s.value;
+                vv.textContent = v.value;
             }
-        </script>
-    </body>
+
+            h.addEventListener('input', updateFilter);
+            s.addEventListener('input', updateFilter);
+            v.addEventListener('input', updateFilter);
+
+            // Initial update
+            updateFilter();
+        });
+
+        function sendWhatsApp() {
+            const h = document.querySelector('#h').value;
+            const s = document.querySelector('#s').value;
+            const v = document.querySelector('#v').value;
+            const message = `${h},${s},${v}`;
+            const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, '_blank');
+        }
+    </script>
+</body>
 </html>
