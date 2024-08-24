@@ -57,7 +57,7 @@
         function sendWhatsApp() {
             const h = document.querySelector('#h').value;
             const s = document.querySelector('#s').value;
-            const label = document.querySelector('#l').value;
+            const l = document.querySelector('#l').value;
             const message = `${h},${s},${l}`;
             const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
