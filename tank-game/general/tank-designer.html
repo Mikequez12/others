@@ -1,8 +1,7 @@
-<img src="tank.svg">
+<img src="tank.svg" id='tank'>
 <label><input type="range" id="h" value="0" max="360" /><span id="hv">0</span></label>
 <label><input type="range" id="s" value="0" max="100" /><span id="sv">0</span></label>
 <label><input type="range" id="v" value="0" max="100" /><span id="vv">0</span></label>
-<button>Visualizar</button>
 <button onclick="sendWhatsaApp()">Enviar</button>
 
 <style>
@@ -13,9 +12,13 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var tank = document.querySelector('#tank');
         var h = document.querySelector('#h');
         var s = document.querySelector('#s');
         var v = document.querySelector('#v');
+        setInterval(function() {
+            tank.style.filter = `hue-rotate(${h.value}deg);`;
+        }, 1000)
     })
     function sendWhatsApp() {
         const message = `${h.value},${s.value},${v.value}`;
