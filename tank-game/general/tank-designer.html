@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor de tanques v1.0 (beta)</title>
+    <style>
+        * {
+            display: block;
+        }
+        label > * {
+            display: inline-block !important;
+        }
+    </style>
 </head>
 <body>
-    <img src="tank.svg" id='tank'>
+    <img src="tank.svg" id='tank' alt="Tank Image">
     <label>
         <input type="range" id="h" value="0" max="360">
         <span id="hv">0</span>
@@ -18,15 +28,6 @@
         <span id="vv">100</span>
     </label>
     <button onclick="sendWhatsApp()">Enviar</button>
-
-    <style>
-        * {
-            display: block;
-        }
-        label > * {
-            display: inline-block !important;
-        }
-    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
