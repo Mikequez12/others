@@ -3,4 +3,17 @@
 <input type="range" id="s" max="100" />
 <input type="range" id="v" max="100" />
 <button>Visualizar</button>
-<button>Enviar</button>
+<button onclick="sendWhatsaApp()">Enviar</button>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var h = document.querySelector('#h');
+        var s = document.querySelector('#s');
+        var v = document.querySelector('#v');
+    })
+    function sendWhatsApp() {
+        const message = `${h.value},${s.value},${v.value}`;
+        const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        window.open(whatsappLink, '_blank');
+    }
+</script>
