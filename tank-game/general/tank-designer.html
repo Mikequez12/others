@@ -20,11 +20,11 @@
         <span id="hv">0</span>
     </label>
     <label>
-        <input type="range" id="s" value="100" max="200">
+        <input type="range" id="s" value="100" max="100">
         <span id="sv">100</span>
     </label>
     <label>
-        <input type="range" id="v" value="100" max="100">
+        <input type="range" id="v" value="100" max="200">
         <span id="vv">100</span>
     </label>
     <button onclick="sendWhatsApp()">Enviar</button>
@@ -34,21 +34,21 @@
             var tank = document.querySelector('#tank');
             var h = document.querySelector('#h');
             var s = document.querySelector('#s');
-            var v = document.querySelector('#v');
+            var l = document.querySelector('#l');
             var hv = document.querySelector('#hv');
             var sv = document.querySelector('#sv');
-            var vv = document.querySelector('#vv');
+            var lv = document.querySelector('#lv');
 
             function updateFilter() {
-                tank.style.filter = `hue-rotate(${h.value}deg) saturate(${s.value}%) brightness(${v.value}%)`;
+                tank.style.filter = `hue-rotate(${h.value}deg) saturate(${s.value}%) brightness(${l.value}%)`;
                 hv.textContent = h.value;
                 sv.textContent = s.value;
-                vv.textContent = v.value;
+                lv.textContent = l.value;
             }
 
             h.addEventListener('input', updateFilter);
             s.addEventListener('input', updateFilter);
-            v.addEventListener('input', updateFilter);
+            l.addEventListener('input', updateFilter);
 
             // Initial update
             updateFilter();
@@ -57,8 +57,8 @@
         function sendWhatsApp() {
             const h = document.querySelector('#h').value;
             const s = document.querySelector('#s').value;
-            const v = document.querySelector('#v').value;
-            const message = `${h},${s},${v}`;
+            const label = document.querySelector('#l').value;
+            const message = `${h},${s},${l}`;
             const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
             window.open(whatsappLink, '_blank');
         }
