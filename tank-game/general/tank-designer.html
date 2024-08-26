@@ -117,7 +117,7 @@
             var lv = document.querySelector('#lv');
 
             function updateFilter() {
-                tank.style.filter = `hue-rotate(${h./100*360}deg) saturate(${s.value}%) brightness(${l.value}%)`;
+                tank.style.filter = `hue-rotate(${h.value / 100 * 360}deg) saturate(${s.value}%) brightness(${l.value}%)`;
                 hv.textContent = h.value;
                 sv.textContent = s.value;
                 lv.textContent = l.value;
