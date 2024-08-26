@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <version>v1.3.1 Ω</version>
+    <version>v1.3.2 Ω</version>
     <title>Editor de tanques</title>
     <style>
         version {
@@ -86,10 +86,10 @@
     </style>
 </head>
 <body>
-    <h1 id='version'>v1.2.8 Ω</h1>
+    <h1 id='version'></h1>
     <img src="tank.svg" id='tank' alt="Tank Image" width="150px">
     <label>
-        <input type="range" id="h" value="0" max="360">
+        <input type="range" id="h" value="0" max="100">
         <span id="hv">0</span>
     </label>
     <label>
@@ -100,7 +100,7 @@
         <input type="range" id="l" value="100" max="100">
         <span id="lv">100</span>
     </label>
-    <button onclick="sendWhatsApp()">Enviar</button><br>
+    <button onclick="sendWhatsApp()">Enviar</button>
     <button id="load">Cargar código</button>
 
     <script>
@@ -117,7 +117,7 @@
             var lv = document.querySelector('#lv');
 
             function updateFilter() {
-                tank.style.filter = `hue-rotate(${h.value}deg) saturate(${s.value}%) brightness(${l.value}%)`;
+                tank.style.filter = `hue-rotate(${h./100*360}deg) saturate(${s.value}%) brightness(${l.value}%)`;
                 hv.textContent = h.value;
                 sv.textContent = s.value;
                 lv.textContent = l.value;
@@ -128,12 +128,13 @@
             l.addEventListener('input', updateFilter);
 
             document.querySelector('#load').addEventListener('click', (event) => {
+                console.log('LOADING');
                 var h = document.querySelector('#h');
                 var s = document.querySelector('#s');
                 var l = document.querySelector('#l');
                 var input = prompt('Introduce el código');
                 try {
-                    input = atob(input).split(',');
+                    input = btoa(input).split(';');
                     h.value = input[0];
                     s.value = input[1];
                     l.value = input[2];
