@@ -101,8 +101,10 @@
         <span id="lv">100</span>
     </label>
     <button onclick="sendWhatsApp()">Enviar</button>
+    <button id="load">Cargar código</button>
 
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#version').innerText = document.querySelector('version').innerHTML;
             document.querySelector('title').innerHTML = `Editor de tanques ${document.querySelector('version').innerHTML}`;
@@ -124,6 +126,23 @@
             h.addEventListener('input', updateFilter);
             s.addEventListener('input', updateFilter);
             l.addEventListener('input', updateFilter);
+
+            document.querySelector('#load').addEventListener('click', function() {
+                console.log('LOADING');
+                var h = document.querySelector('#h');
+                var s = document.querySelector('#s');
+                var l = document.querySelector('#l');
+                var input = prompt('Introduce el código');
+                try {
+                    input = btoa(input).split(';');
+                    h.value = input[0];
+                    s.value = input[1];
+                    l.value = input[2];
+                } catch {
+                    alert('Código inválido');
+                }
+                updateFilter();
+            });
 
             // Initial update
             updateFilter();
