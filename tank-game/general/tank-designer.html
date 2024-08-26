@@ -100,7 +100,7 @@
         <input type="range" id="l" value="100" max="100">
         <span id="lv">100</span>
     </label>
-    <button onclick="sendWhatsApp()">Enviar</button>
+    <button onclick="sendWhatsApp()">Enviar</button><br>
     <button id="load">Cargar código</button>
 
     <script>
@@ -128,13 +128,13 @@
             l.addEventListener('input', updateFilter);
 
             document.querySelector('#load').addEventListener('click', (event) => {
-                console.log('LOADING');
                 var h = document.querySelector('#h');
                 var s = document.querySelector('#s');
                 var l = document.querySelector('#l');
                 var input = prompt('Introduce el código');
                 try {
                     input = btoa(input).split(';');
+                    console.log(input);
                     h.value = input[0];
                     s.value = input[1];
                     l.value = input[2];
