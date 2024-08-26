@@ -133,7 +133,7 @@
                 var l = document.querySelector('#l');
                 var input = prompt('Introduce el código');
                 try {
-                    input = btoa(input).split(';');
+                    input = atob(input).split(';');
                     console.log(input);
                     h.value = input[0];
                     s.value = input[1];
