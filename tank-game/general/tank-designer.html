@@ -127,7 +127,7 @@
             s.addEventListener('input', updateFilter);
             l.addEventListener('input', updateFilter);
 
-            document.querySelector('#load').addEventListener('click', function() {
+            document.querySelector('#load').addEventListener('click', (event) => {
                 console.log('LOADING');
                 var h = document.querySelector('#h');
                 var s = document.querySelector('#s');
@@ -140,7 +140,7 @@
                     l.value = input[2];
                 } catch {
                     alert('Código inválido');
-                }
+                };
                 updateFilter();
             });
 
