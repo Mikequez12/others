@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <version>v1.3.4 Ω</version>
+    <version>v1.3.5 Ω</version>
     <title>Editor de tanques</title>
     <style>
         version {
@@ -89,7 +89,7 @@
     <h1 id='version'></h1>
     <img src="tank.svg" id='tank' alt="Tank Image" width="150px">
     <label>
-        <input type="range" id="h" value="0" max="100">
+        <input type="range" id="h" value="0" max="200">
         <span id="hv">0</span>
     </label>
     <label>
@@ -117,7 +117,7 @@
             var lv = document.querySelector('#lv');
 
             function updateFilter() {
-                tank.style.filter = `hue-rotate(${parseInt(h.value / 100 * 360)}deg) saturate(${s.value}%) brightness(${l.value}%)`;
+                tank.style.filter = `hue-rotate(${parseInt(h.value / 200 * 360)}deg) saturate(${s.value}%) brightness(${l.value}%)`;
                 hv.textContent = h.value;
                 sv.textContent = s.value;
                 lv.textContent = l.value;
