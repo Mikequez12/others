@@ -1,0 +1,48 @@
+<style>
+  #mybody{text-align:center;padding-top:40px;}
+  button#mybtn {
+  transform:scale(2);
+  background:black;
+  border:none;
+  color:white;
+  padding:10px;
+  border-radius:50px;
+}
+</style>
+<script>
+ function saquear() {
+ 
+ const lootTable = [
+   '"The Last Emperor"',
+   
+   "+5$",
+   "Piedra preciosa (10$)",
+   "Piedra preciosa (20$)",
+   "Piedra preciosa (50$)",
+   "Piedra preciosa (100$)",
+   "Espada común",
+   "Martillo común",
+   "+50$",
+   "-5$",
+   "-50$",
+   "Redbull",
+   "Esclavo",
+   "-5HP",
+   "-50HP",
+   "-5MANA",
+   "-10MANA",
+   "Double roll",
+   "+5HP",
+   "+5MANA",
+   "+15HP Limit",
+   "+10MANA Limit",
+   "Redbull",
+   "Esclavo"
+ ];
+  document.body.querySelector('div').innerText = lootTable[Math.floor(Math.random()*(lootTable.length-1))]
+}
+</script>
+<body>
+<div id='mybody'>
+<button id='mybtn' onclick='saquear()'>Saquear</button>
+</div></body>
