@@ -1,0 +1,28 @@
+<style>
+  body {
+    text-align:center;
+    font-family:sans-serif;
+  }
+  button {
+    padding:5px;
+    outline:none;
+    border:solid 1px black;
+    background: black;
+    color:white;
+    border-radius:3px;
+    transition:all .5s ease;
+  }
+  button:hover {
+    background: white;
+    color: black;
+  }
+</style>
+
+<meta charset='utf-8'>
+<button onclick='start()'>Start</button>
+<script>
+  pool = atob(window.location.hash.slice(1)).split(';');
+  function start() {
+    document.body.textContent = pool[Math.round(Math.random()*pool.length)]
+  }
+</script>
