@@ -7,4 +7,4 @@ echo Updating...
 clear
 
 echo Please, introduce verify code to end the update: 
-write command
+read command
