@@ -10,7 +10,7 @@ def getRandom():
 
 arr = []
 
-for i in range(1000):
+for i in range(100000):
   os.system('clear')
   arr.append(getRandom())
   os.system('echo ' + ''.join(arr))
