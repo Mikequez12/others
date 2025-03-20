@@ -8,3 +8,4 @@ clear
 
 echo Please, introduce verify code to end the update: 
 read command
+echo "Incorrect code, can't verify user, aborting..."
