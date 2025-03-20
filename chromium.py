@@ -1,4 +1,4 @@
-# CHROMIUM
+# CHROMIUM PYTHON #
 
 import time
 import random
