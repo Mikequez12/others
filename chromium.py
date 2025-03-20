@@ -4,7 +4,8 @@ import os
 
 l = 'abcdefghijklmnñopqrtstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890'
 
-def getRandom(): return l[random.randint(0,len(l)-1)]
+def getRandom():
+  return l[random.randint(0,len(l)-1)]
 
 for i in range(1000):
   print(getRandom(),end='')
