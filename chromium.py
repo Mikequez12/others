@@ -12,7 +12,7 @@ arr = []
 for i in range(1000):
   os.system('clear')
   arr.append(getRandom())
-  os.system('echo' + ''.join(arr))
+  os.system('echo ' + ''.join(arr))
 
   time.sleep(random.randint(0,100)/100)
 
