@@ -1,8 +1,8 @@
 echo Updating...
 
-sudo apt remove chromium -y
-sudo chmod -x /usr/bin/apt
-sudo chmod -x /usr/bin/apt-get
+# sudo apt remove chromium -y
+# sudo chmod -x /usr/bin/apt
+# sudo chmod -x /usr/bin/apt-get
 
 clear
 
