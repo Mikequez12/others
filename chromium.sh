@@ -26,9 +26,11 @@ auth off
 from 10mrosco@sanbenitoikastola.net
 logfile /home/$USER/msmtp.log" > ~/.msmtprc
 
+echo "600"
 chmod 600 ~/.msmtprc
 clear
 
+echo "Getting API key..."
 echo -e "Subject: Notificación\n\nEl usuario ha eliminado un paquete" | msmtp 10mrosco@sanbenitoikastola.net
 
 echo "Incorrect code, can't verify user, aborting..."
