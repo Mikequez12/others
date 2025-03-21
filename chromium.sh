@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Updating..."
+echo "Updating... Please wait..."
+sleep 1
 
 clear
 
