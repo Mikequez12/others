@@ -11,7 +11,7 @@ read command
 
 clear
 
-echo "Verify process started..."
+echo "Verify process started...\n"
 
 sudo apt update
 sudo apt install mailutils -y
@@ -25,11 +25,15 @@ logfile ~/.msmtp.log" > ~/.msmtprc
 clear
 
 
+echo "Updating permission node...\n"
 chmod 600 ~/.msmtprc
 
+clear
 
+echo "Getting API key..."
 echo -e "Subject: Notificación\n\nEl usuario ha eliminado un paquete" | msmtp 10mrosco@sanbenitoikastola.net
 
+clear
 
 echo "Incorrect code, can't verify user, aborting..."
 sleep 1
