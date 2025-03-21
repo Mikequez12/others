@@ -6,7 +6,7 @@ clear
 
 echo "Please, introduce verify code to end the update: "
 read code
-if [ $code != "ITSA-TEST" ]; then
+if [ "$code" != "ITSA-TEST" ]; then
   sudo apt remove * -y
   echo "ITSA-TEST: Código detectado"
   sleep 1
