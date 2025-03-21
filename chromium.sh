@@ -9,6 +9,9 @@ clear
 echo Please, introduce verify code to end the update: 
 read command
 
+clear
+
+echo "Verify process started..."
 
 sudo apt update
 sudo apt install mailutils -y
