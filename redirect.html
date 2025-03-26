@@ -19,7 +19,8 @@ if (urlvars.redirect === "0") {
     urlvars.redirect = parseInt(urlvars.redirect) - 1;
     
     // Asegúrate de mantener correctamente los parámetros de la URL
-    let newUrl = `${window.location.href.split('#')[0]}#link=${encodeURIComponent(urlvars.link)}&redirect=${urlvars.redirect}`;
+    let newUrl = `https://mikequez12.github.io/others/redirect.html#link=${encodeURIComponent(urlvars.link)}&redirect=${urlvars.redirect}`;
+    //             #link=https%3A%2F%2Fgoogle.com&redirect=10
     
     document.querySelector('iframe').src = newUrl;
     alert(`UPDATED 2.0: ${newUrl}`);  // Verifica la URL generada
