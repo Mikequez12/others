@@ -8,5 +8,5 @@
     }
 </style>
 <script>
-    alert('{'+window.location.hash.split('&&').map((el)=>(el.split('=').map((v)=>`"${v}"`).join(':'))).join(',')+'}')
+    alert('{'+window.location.hash.slice(1).split('&&').map((el)=>(el.split('=').map((v)=>`"${v}"`).join(':'))).join(',')+'}')
 </script>
