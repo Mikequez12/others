@@ -14,5 +14,6 @@
     } else {
         urlvars.redirect = parseInt(urlvars.redirect)-1;
         document.querySelector('iframe').src=`${window.location.href}#${urlvars.link}&${urlvars.redirect}`;
+        alert(document.querySelector('iframe').src)
     }
 </script>
