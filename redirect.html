@@ -24,7 +24,7 @@ if (urlvars.redirect === "0") {
     let newUrl = `${window.location.href.split('#')[0]}#link=${encodeURIComponent(urlvars.link)}&redirect=${urlvars.redirect}`;
     
     document.querySelector('iframe').src = newUrl;
-    alert(newUrl);  // Verifica la URL generada
+    alert(`UPDATED: ${newUrl}`);  // Verifica la URL generada
 }
 
 </script>
