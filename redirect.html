@@ -8,12 +8,23 @@
     }
 </style>
 <script>
-    urlvars = JSON.parse('{'+window.location.hash.slice(1).split('&').map((el)=>(el.split('=').map((v)=>`"${v}"`).join(':'))).join(',')+'}');
-    if (urlvars.redirect == "0") {
-        document.querySelector('iframe').src=decodeURIComponent(urlvars.link);
-    } else {
-        urlvars.redirect = parseInt(urlvars.redirect)-1;
-        document.querySelector('iframe').src=`${window.location.href.split('#')[0]}#link=${urlvars.link}&redirect=${urlvars.redirect}`;
-        alert(document.querySelector('iframe').src)
-    }
+let urlvars = {};
+window.location.hash.slice(1).split('&').forEach((el) => {
+    const [key, value] = el.split('=');
+    urlvars[key] = decodeURIComponent(value);
+});
+
+if (urlvars.redirect === "0") {
+    document.querySelector('iframe').src = decodeURIComponent(urlvars.link);
+} else {
+    // Decrementar el valor de 'redirect'
+    urlvars.redirect = parseInt(urlvars.redirect) - 1;
+    
+    // Asegúrate de mantener correctamente los parámetros de la URL
+    let newUrl = `${window.location.href.split('#')[0]}#link=${encodeURIComponent(urlvars.link)}&redirect=${urlvars.redirect}`;
+    
+    document.querySelector('iframe').src = newUrl;
+    alert(newUrl);  // Verifica la URL generada
+}
+
 </script>
