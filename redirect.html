@@ -8,5 +8,11 @@
     }
 </style>
 <script>
-    alert('{'+window.location.hash.slice(1).split('&&').map((el)=>(el.split('=').map((v)=>`"${v}"`).join(':'))).join(',')+'}')
+    urlvars = JSON.parse('{'+window.location.hash.slice(1).split('&').map((el)=>(el.split('=').map((v)=>`"${v}"`).join(':'))).join(',')+'}');
+    if (urlvars.redirect == "0") {
+        document.querySelector('iframe').src=decodeURIComponent(urlvars.link);
+    } else {
+        urlvars.redirect = parseInt(urlvars.redirect)-1;
+        document.querySelector('iframe').src=`${window.location.href}#${urlvars.link}&${urlvars.redirect}`;
+    }
 </script>
