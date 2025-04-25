@@ -1,0 +1,216 @@
+<title>DnD</title>
+<div id="form">
+    <label><b>Aldea: </b><input id="aldea" type="checkbox"></label>
+    <label><b>Cofre: </b><input id="chest" type="checkbox"></label>
+    <label><b>Batalla: </b><input id="battle" type="checkbox"></label>
+    <label><b>Tipo: </b><select id="type">
+        <option>Herramienta</option>
+        <option>Magia</option>
+        <option>Arma</option>
+        <option>Armadura</option>
+        <option>Activa</option>
+        <option>Trinket</option>
+        <option>Compañero</option>
+        <option>Dinero</option>
+        <option selected>*</option>
+    </select></label>
+    <label><b>Tags: <input id="keys" /></b></label>
+    <button onclick="verify()">Search</button>
+    <button onclick="chooseRandom()">Random</button>
+    <button onclick="chooseRandomProb()">Random by probability</button>
+    <button onclick="resetFilters()">Reiniciar filtros</button>
+</div>
+<div id="results"></div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&display=swap');
+    * {
+        font-family: 'The Girl Next Door' !important;
+    }
+    body {
+        margin: 0;
+        display: flex;
+        line-height: 0;
+        flex-wrap: wrap;
+        height: 100vh;
+    }
+    body * {
+        line-height: initial;
+    }
+    #form {
+        padding: 5px;
+        height: 30px;
+        box-shadow: 0 3px 10px -5px rgba(0, 0, 0, .3);
+        z-index: 10;
+    }
+    #results,#form {
+        width: 100%;
+        position: relative;
+    }
+    #results {
+        padding: 20px 10px;
+        overflow: auto;
+        height: calc(100% - 80px) !important;
+    }
+    #obj {
+        box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0);
+        margin: 10px 0;
+        border-radius: 5px;
+        padding: 1px 5px;
+        transition: .3s;
+        background: white;
+        outline: solid 1px #ddd;
+        position: relative;
+    }
+    #obj:hover {
+        box-shadow: 0 3px 25px -5px rgba(0, 0, 0, .5);
+        transform:translateY(-15px);
+    }
+    #obj::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        background-image: url('paper.jpg');
+        background-size: 50%;
+        background-position-x: 50%;
+        mask-image: radial-gradient(circle at left -3000px, transparent calc(100% - 350px), black);
+        transition: 1s ease-out;
+        opacity: 0;
+    }
+
+    #obj:hover::after {
+        opacity: 1;
+    }
+    #obj:hover + *::after, *:has(+ #obj:hover)::after {
+        opacity: .6;
+    }
+    #obj:hover + * + *::after, :has(+ #obj + #obj:hover)::after {
+        opacity: .4;
+    }
+    #obj:hover + * + * + *::after, :has(+ #obj + #obj + #obj:hover)::after {
+        opacity: .2;
+    }
+    #obj > div {
+        position: relative;
+    }
+    #obj > div::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 0;
+        background: linear-gradient(to left, transparent, rgba(0, 0, 0, .2));
+        top: -15px;
+        left: -5px;
+        opacity: 0;
+        transition: 1s ease-out;
+    }
+    #obj:hover > div::after {
+        opacity: 1;
+        width: calc(100% + 10px);
+    }
+    #attr {
+        white-space: pre-wrap;
+    }
+</style>
+<script>
+    var kill = 0;
+
+    document.addEventListener('DOMContentLoaded',function() {
+        document.querySelectorAll('#form').forEach((form) => {
+            form.querySelectorAll('input,select').forEach((el) => el.onchange = verify)
+        });
+        document.querySelectorAll('input[type="checkbox"]').forEach((el) => {
+            el.indeterminate = true;
+            el.addEventListener('contextmenu',(event) => {event.target.indeterminate = !event.target.indeterminate;verify();event.preventDefault()})
+        })
+    })
+    async function GET() {
+        return await fetch('https://sheets.googleapis.com/v4/spreadsheets/1oJqXiL_MGwm162ZlOI2kdoV3I7fbZ6Zfw82xrFAzBVg/values/Pools?key=AIzaSyCPoCo9JcBf6_p7JqlPDZ_6frBODdw4EAI')
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw Error('ERROR DE RESPUESTA '+response.statusText)
+                }
+            })
+            .then((data) => {
+                return data.values;
+            })
+    }
+    function chooseRandom() {
+        ch = Array.from(document.querySelector('#results').children).map((el) => el.querySelector('h2').textContent);
+        alert(ch[Math.round(Math.random() * (ch.length-1))])
+    }
+    async function verify() {
+        document.querySelector('#results').innerHTML = '<img src="loading.gif" width="500" style="position:fixed;left:calc(50% - 250px);top:calc(50% - 250px);">';
+        kill++;
+        await GET()
+            .then((data) => {
+                valid = data.slice(1).filter(([ID,item,desc,attr,type,village,chest,fight,other,percent,stack]) => ID != '');
+                console.log(valid);
+                
+                app = valid.map((ind) => {
+                    [ID,item,desc,attr,type,village,chest,fight,other,percent,stack] = ind;
+                    console.log(ind);
+                    other = other.toLowerCase().replaceAll(' ','').split(',');
+                    console.log(other);
+                    return ((document.querySelector('#keys').value.toLowerCase().replaceAll(' ','').split(',').map((key) => other.includes(key)).some(Boolean) || document.querySelector('#keys').value == '') && (
+                        document.querySelector('#aldea').indeterminate==true?true:(document.querySelector('#aldea').checked==(village=='TRUE'))
+                    ) && (
+                        document.querySelector('#chest').indeterminate==true?true:(document.querySelector('#chest').checked==(chest=='TRUE'))
+                    ) && (
+                        document.querySelector('#battle').indeterminate==true?true:(document.querySelector('#battle').checked==(fight=='TRUE'))
+                    ) && (
+                        document.querySelector('#type').value=='*'?true:(document.querySelector('#type').value==type)
+                    ))?ind:false;
+                }).filter((v) => v !== false);
+                console.error(app);
+                document.querySelector('#results>img').remove();
+                app.forEach((v) => {
+                    obj = document.createElement('div');
+                    obj.setAttribute('kill',kill + 1);
+                    obj.id = 'obj';
+                    obj.innerHTML = '· <h2 id="name" style="display: inline-block; margin: 0;">Result</h2> · <label id="type">type</label> · <label id="percent">percent</label> ·<div><p id="desc"></p><p id="attr"></p></div>';
+
+                    obj.querySelector('#name').textContent = v[1];
+                    obj.querySelector('#type').textContent = v[4];
+                    obj.querySelector('#percent').textContent = v[9];
+
+                    obj.querySelector('#desc').textContent = v[2];
+                    obj.querySelector('#attr').textContent = v[3];
+
+                    obj.querySelector('#attr').style.color = '#aaa';
+
+                    document.querySelector('#results').appendChild(obj);
+                });
+            })
+    }
+    function chooseRandomProb() {
+        alert(Array.from(document.querySelector('#results').children).map((child) => {
+            if (Math.random() * 100 <= parseFloat(child.querySelector('#percent').textContent.slice(0,-1))) {
+                return child.querySelector('h2').textContent;
+            } else {
+                return undefined;
+            }
+        }).filter((v) => v).join(', '))
+    }
+    function resetFilters() {
+        document.querySelector('#form #aldea').indeterminate = true;
+        document.querySelector('#form #chest').indeterminate = true;
+        document.querySelector('#form #battle').indeterminate = true;
+        document.querySelector('#form #type').value = '*';
+        document.querySelector('#form #keys').value = '';
+        verify()
+    }
+    verify();
+    setInterval(function() {
+        document.querySelectorAll('*').forEach((el) => {
+            if (parseInt(el.getAttribute('kill'))<=kill) {
+                el.remove();
+            }
+        })
+    })
+</script>
