@@ -14,6 +14,6 @@
 <iframe></iframe>
 <script>
   document.addEventListener('DOMContentLoaded',(event)=>{
-    document.querySelector('iframe').src=window.location.hash.slice(1)
+    document.querySelector('iframe').src=decodeURIComponent(window.location.hash.slice(1))
   })
 </script>
